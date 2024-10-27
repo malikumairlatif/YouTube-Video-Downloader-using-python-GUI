@@ -10,7 +10,19 @@
 ## ytv4.1-validation.py
 
 ### Library Change:
-The first version uses `pytube`, while the second uses `yt_dlp`, which is generally more robust for downloading YouTube videos.
+I have update the GUI **(ytv4.1-validation.py)** with the following changes:
+
+The `HTTP 404: Bad Request` error originates from `pytube` which typically occurs when it tries to fetch a YouTube video's metadata and encounters issues with the URL or the request itself. This can happen due to:
+
+1. **URL Format**: `pytube` may be more sensitive to the exact format of the video URL, while `yt_dlp` can handle some variations and redirects more gracefully.
+
+2. **Changes in YouTube's API**: YouTube frequently updates its API and site structure. `pytube` might lag in updates, leading to errors when it encounters unexpected changes. `yt_dlp` is often updated more quickly to adapt to these changes.
+
+3. **Error Handling**: `yt_dlp` has more robust error handling and fallback mechanisms, allowing it to manage errors better when fetching video information.
+
+4. **Request Headers**: `yt_dlp` may send different or more comprehensive request headers that comply better with YouTube's requirements, reducing the likelihood of encountering a 404 error.
+
+In summary, `yt_dlp` is generally more resilient to variations and changes in YouTube's backend, leading to fewer issues compared to `pytube`.
 
 ### Quality Selection:
 In the second version, a new button ("Check Available Formats") is added to check and load available video formats dynamically based on the provided URL. This improves user experience by allowing users to see which qualities are available before attempting to download.
